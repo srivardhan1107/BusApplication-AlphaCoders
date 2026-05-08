@@ -1,14 +1,5 @@
 package com.spring.alpha.controller;
 
-import com.alpha.busbooking.dto.JwtResponse;
-import com.alpha.busbooking.dto.LoginRequest;
-import com.alpha.busbooking.dto.MessageResponse;
-import com.alpha.busbooking.dto.SignupRequest;
-import com.alpha.busbooking.entity.User;
-import com.alpha.busbooking.repository.UserRepository;
-import com.alpha.busbooking.security.JwtUtils;
-import com.alpha.busbooking.security.UserDetailsImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +7,22 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.spring.alpha.dto.JwtResponse;
+import com.spring.alpha.dto.LoginRequest;
+import com.spring.alpha.dto.MessageResponse;
+import com.spring.alpha.dto.SignupRequest;
+import com.spring.alpha.entity.User;
+import com.spring.alpha.repository.UserRepository;
+import com.spring.alpha.service.JwtUtils;
+import com.spring.alpha.service.UserDetailsImpl;
+
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
