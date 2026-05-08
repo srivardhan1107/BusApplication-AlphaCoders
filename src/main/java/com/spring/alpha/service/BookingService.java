@@ -1,15 +1,15 @@
 package com.spring.alpha.service;
 
-import com.alpha.busbooking.dto.BookingRequest;
-import com.alpha.busbooking.entity.Booking;
-import com.alpha.busbooking.entity.Bus;
-import com.alpha.busbooking.entity.User;
-import com.alpha.busbooking.repository.BookingRepository;
-import com.alpha.busbooking.repository.BusRepository;
-import com.alpha.busbooking.repository.UserRepository;
-import com.alpha.busbooking.exception.BadRequestException;
-import com.alpha.busbooking.exception.ResourceNotFoundException;
-import com.alpha.busbooking.exception.UnauthorizedException;
+import com.spring.alpha.dto.BookingRequest;
+import com.spring.alpha.entity.Booking;
+import com.spring.alpha.entity.Bus;
+import com.spring.alpha.entity.User;
+import com.spring.alpha.repository.BookingRepository;
+import com.spring.alpha.repository.BusRepository;
+import com.spring.alpha.repository.UserRepository;
+import com.spring.alpha.exception.BadRequestException;
+import com.spring.alpha.exception.ResourceNotFoundException;
+import com.spring.alpha.exception.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,9 +1,9 @@
 package com.spring.alpha.service;
 
-import com.alpha.busbooking.entity.Bus;
-import com.alpha.busbooking.exception.ResourceNotFoundException;
-import com.alpha.busbooking.repository.BusRepository;
-import com.alpha.busbooking.repository.BookingRepository;
+import com.spring.alpha.entity.Bus;
+import com.spring.alpha.exception.ResourceNotFoundException;
+import com.spring.alpha.repository.BusRepository;
+import com.spring.alpha.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

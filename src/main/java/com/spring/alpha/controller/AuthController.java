@@ -21,8 +21,7 @@ import com.spring.alpha.dto.MessageResponse;
 import com.spring.alpha.dto.SignupRequest;
 import com.spring.alpha.entity.User;
 import com.spring.alpha.repository.UserRepository;
-import com.spring.alpha.security.JwtUtils;
-import com.spring.alpha.security.UserDetailsImpl;
+
 
 import jakarta.validation.Valid;
 
