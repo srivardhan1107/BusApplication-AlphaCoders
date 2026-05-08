@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import com.spring.alpha.security.UserDetailsImpl;
+
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 

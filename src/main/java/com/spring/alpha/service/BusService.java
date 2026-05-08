@@ -48,7 +48,7 @@ public class BusService {
         // Handle seat updates properly
         int bookedSeats = existingBus.getTotalSeats() - existingBus.getAvailableSeats();
         if (updatedBus.getTotalSeats() < bookedSeats) {
-            throw new com.alpha.busbooking.exception.BadRequestException("Total seats cannot be less than already booked seats (" + bookedSeats + ")");
+            throw new com.spring.alpha.exception.BadRequestException("Total seats cannot be less than already booked seats (" + bookedSeats + ")");
         }
         
         existingBus.setTotalSeats(updatedBus.getTotalSeats());
