@@ -1,6 +1,8 @@
 package com.spring.alpha.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,8 +21,7 @@ import com.spring.alpha.dto.MessageResponse;
 import com.spring.alpha.dto.SignupRequest;
 import com.spring.alpha.entity.User;
 import com.spring.alpha.repository.UserRepository;
-import com.spring.alpha.service.JwtUtils;
-import com.spring.alpha.service.UserDetailsImpl;
+
 
 import jakarta.validation.Valid;
 
