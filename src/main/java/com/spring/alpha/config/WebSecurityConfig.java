@@ -6,6 +6,7 @@ import com.spring.alpha.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -27,15 +28,53 @@ import java.util.List;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class WebSecurityConfig {
+
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
+    @Autowired
+    private AuthTokenFilter authTokenFilter;
+
+    // ✅ Order(1) = checked FIRST, matches only swagger paths, no JWT filter runs at all
     @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
+    @Order(1)
+    public SecurityFilterChain swaggerFilterChain(HttpSecurity http) throws Exception {
+        http
+            .securityMatcher(
+                "/v3/api-docs",
+                "/v3/api-docs/**",
+                "/swagger-ui/**",
+                "/swagger-ui.html",
+                "/swagger-ui/index.html",
+                "/swagger-resources/**",
+                "/webjars/**"
+            )
+            .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+            .csrf(csrf -> csrf.disable());
+        return http.build();
+    }
+
+    // ✅ Order(2) = your normal security chain for everything else
+    @Bean
+    @Order(2)
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(auth ->
+                auth.requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/api/buses/search", "/api/buses").permitAll()
+                    .anyRequest().authenticated()
+            );
+
+        http.authenticationProvider(authenticationProvider());
+        http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
     }
 
     @Bean
@@ -53,25 +92,6 @@ public class WebSecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth ->
-                auth.requestMatchers("/api/auth/**").permitAll()
-                    .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                    .requestMatchers("/api/buses/search", "/api/buses").permitAll()
-                    .anyRequest().authenticated()
-            );
-
-        http.authenticationProvider(authenticationProvider());
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
     }
 
     @Bean
