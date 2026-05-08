@@ -1,8 +1,8 @@
 package com.spring.alpha.controller;
 
-import com.alpha.busbooking.entity.Bus;
-import com.alpha.busbooking.service.BusService;
-import com.alpha.busbooking.repository.BookingRepository;
+import com.spring.alpha.entity.Bus;
+import com.spring.alpha.service.BusService;
+import com.spring.alpha.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;

@@ -1,5 +1,6 @@
 package com.spring.alpha.service;
 
+import com.spring.alpha.dto.BookingRequest;
 import com.spring.alpha.entity.Booking;
 import com.spring.alpha.entity.Bus;
 import com.spring.alpha.entity.User;
